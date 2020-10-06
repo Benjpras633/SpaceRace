@@ -36,7 +36,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Showcard Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(240, 95);
+            this.label1.Location = new System.Drawing.Point(166, 88);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(342, 253);
             this.label1.TabIndex = 0;
@@ -45,7 +45,7 @@
             // PlayButton
             // 
             this.PlayButton.Font = new System.Drawing.Font("Showcard Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PlayButton.Location = new System.Drawing.Point(260, 371);
+            this.PlayButton.Location = new System.Drawing.Point(198, 344);
             this.PlayButton.Name = "PlayButton";
             this.PlayButton.Size = new System.Drawing.Size(248, 98);
             this.PlayButton.TabIndex = 1;
@@ -56,7 +56,7 @@
             // ExitButton
             // 
             this.ExitButton.Font = new System.Drawing.Font("Showcard Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExitButton.Location = new System.Drawing.Point(260, 527);
+            this.ExitButton.Location = new System.Drawing.Point(198, 472);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(248, 87);
             this.ExitButton.TabIndex = 2;
@@ -73,7 +73,7 @@
             this.Controls.Add(this.PlayButton);
             this.Controls.Add(this.label1);
             this.Name = "MainScreen";
-            this.Size = new System.Drawing.Size(839, 887);
+            this.Size = new System.Drawing.Size(750, 750);
             this.ResumeLayout(false);
 
         }

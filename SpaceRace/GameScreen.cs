@@ -7,15 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Threading;
 namespace SpaceRace
 {
     public partial class GameScreen : UserControl
 
     {
-        //movement boolean for p1 and p2
+        //movement boolean for p1 
         Boolean leftArrowDown, rightArrowDown, upArrowDown, downArrowDown;
-        Boolean wArrowDown, aArrowDown, sArrowDown, dArrowDown;
+        
 
         //color of bubble
         SolidBrush BubbleBrush = new SolidBrush(Color.White);
@@ -23,8 +23,9 @@ namespace SpaceRace
         //list for bubble coming on screen
         List<bubble> left = new List<bubble>();
         List<bubble> Right = new List<bubble>();
-        int leftX = 200;
-        int gap = 150;
+        int playerScore = 0;
+        
+
 
 
         //random generator
@@ -35,7 +36,15 @@ namespace SpaceRace
         int bubbleSize = 3;
         //starting player sizes
         int p1Size, p2Size;
-        int p1speed, p2speed = 10;
+        Boolean moveRight = true;
+     
+
+        int BubbleTimer = 0;
+        bubble hero;
+        
+        int heroSpeed = 10;
+        int heroSize = 30;
+
 
         public GameScreen()
         {
@@ -48,10 +57,24 @@ namespace SpaceRace
         {
             p1Size = p2Size = 5;
 
-            bubble newbubble = new bubble(50, 0, 20);
-            bubble newBubble2 = new bubble(50 + 400, 0, 20);
+            //hero = new bubble(250, 400, 20);
+            hero = new bubble(this.Width / 2 - heroSize / 2, 370, heroSize);
+
+            MakeBubble();
+            outputLabel.Text = "" + playerScore;
+        }
+        public void MakeBubble()
+        {
+            int randValue = randGen.Next(1, 450);
+
+            bubble newbubble = new bubble(0, randValue, 20);
             left.Add(newbubble);
+
+            randValue = randGen.Next(1, 450);
+            bubble newBubble2 = new bubble(this.Width, randValue, 20);
             Right.Add(newBubble2);
+
+            BubbleTimer = 0;
         }
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -70,19 +93,7 @@ namespace SpaceRace
                     break;
                 case Keys.Down:
                     downArrowDown = true;
-                    break;
-                case Keys.W:
-                    wArrowDown = true;
-                    break;
-                case Keys.D:
-                    dArrowDown = true;
-                    break;
-                case Keys.A:
-                    aArrowDown = true;
-                    break;
-                case Keys.S:
-                    sArrowDown = true;
-                    break;
+                    break;          
                 case Keys.Escape:
                     //end program
                     Application.Exit();
@@ -106,18 +117,7 @@ namespace SpaceRace
                 case Keys.Down:
                     downArrowDown = false;
                     break;
-                case Keys.W:
-                    wArrowDown = false;
-                    break;
-                case Keys.D:
-                    dArrowDown = false;
-                    break;
-                case Keys.A:
-                    aArrowDown = false;
-                    break;
-                case Keys.S:
-                    sArrowDown = false;
-                    break;
+              
             }
         }
 
@@ -130,31 +130,59 @@ namespace SpaceRace
             }
             foreach (bubble b in Right)
             {
-                b.Move(5);
+                b.Move(-5);
+            }
+
+            BubbleTimer++;
+
+            if(BubbleTimer == 20)
+            {
+                MakeBubble();
             }
 
             // remove bubble if it has gone off screen
-            if (left.Count > 0)
-            {
+            //if (left.Count > 0)
+            //{
 
 
 
-                if (left[0].x > 400)
-                {
-                    left.RemoveAt(0);
-                    Right.RemoveAt(0);
-                }
-                else if (Right[0].x < this.Width)
-                {
-                    left.RemoveAt(0);
-                    Right.RemoveAt(0);
-                }
+            //    if (left[0].x > 400)
+            //    {
+            //        left.RemoveAt(0);
+            //        Right.RemoveAt(0);
+            //    }
+            //    else if (Right[0].x < this.Width)
+            //    {
+            //        left.RemoveAt(0);
+            //        Right.RemoveAt(0);
+            //    }
 
 
-            }
+            //}
             // controlling rocket
+            if(leftArrowDown == true)
+            {
+                hero.Move(heroSpeed, false);
+            }
 
+            if(rightArrowDown == true)
+            {
+                hero.Move(heroSpeed, true);
+            }
             // check for collision
+            bubble hero = new bubble(hero.x, hero.y, hero.size, hero.size);
+            if (left.Count <= 4)
+
+                //0-3
+                for (int i = 0; i < 4; i++)
+                {
+                    bubble hero = new bubble(left[i].x, left[i].y, left[i].size, left[i].size);
+                    bubble bubble = new bubble(right[i].x, right[i].y, right[i].size,Right[i].size);
+                    if (hero.IntersectsWith(bubble))
+                    {
+                        gameLoop.Enabled = false;
+                    }
+                }
 
             Refresh();
         }
@@ -165,17 +193,19 @@ namespace SpaceRace
                 //TODO - draw bubbles to screen
                 foreach (bubble b in left)
                 {
-                    BubbleBrush.Color = b.color;
-                    e.Graphics.FillEllipse(BubbleBrush, b.x, b.y, b.size, b.size);
+                   
+                    e.Graphics.FillEllipse(b.bubbleBrush, b.x, b.y, b.size, b.size);
 
 
                 }
                 foreach (bubble b in Right)
                 {
-                    BubbleBrush.Color = b.color;
-                    e.Graphics.FillEllipse(BubbleBrush, b.x, b.y, b.size, b.size);
+                    
+                    e.Graphics.FillEllipse(b.bubbleBrush, b.x, b.y, b.size, b.size);
                 }
 
+                e.Graphics.FillEllipse(BubbleBrush, hero.x, hero.y, hero.size, hero.size);
+                e.Graphics.DrawImage(Properties.Resources.rocket, hero.x, hero.y,hero.size,hero.size);
             }
         }
     }
