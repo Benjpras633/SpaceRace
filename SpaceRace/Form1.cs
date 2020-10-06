@@ -21,6 +21,10 @@ namespace SpaceRace
         {
             MainScreen ms = new MainScreen();
             this.Controls.Add(ms);
+            ms.Location = new Point((this.Width - ms.Width) / 2, (this.Height - ms.Height) / 2);
+
+            //hide cursor
+            Cursor.Hide();
         }
     }
 }

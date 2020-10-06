@@ -25,6 +25,12 @@ namespace SpaceRace
             GameScreen gs = new GameScreen();
             f.Controls.Add(gs);
             gs.Focus();
+           
+        }
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

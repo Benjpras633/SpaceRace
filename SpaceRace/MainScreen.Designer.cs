@@ -62,6 +62,7 @@
             this.ExitButton.TabIndex = 2;
             this.ExitButton.Text = "Exit";
             this.ExitButton.UseVisualStyleBackColor = true;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // MainScreen
             // 
@@ -72,7 +73,7 @@
             this.Controls.Add(this.PlayButton);
             this.Controls.Add(this.label1);
             this.Name = "MainScreen";
-            this.Size = new System.Drawing.Size(785, 723);
+            this.Size = new System.Drawing.Size(839, 887);
             this.ResumeLayout(false);
 
         }

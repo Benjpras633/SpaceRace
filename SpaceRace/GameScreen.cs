@@ -32,9 +32,10 @@ namespace SpaceRace
 
         //location and size of bubble
         int bubbleX, bubbleY;
-        int foodSize = 3;
+        int bubbleSize = 3;
         //starting player sizes
         int p1Size, p2Size;
+        int p1speed, p2speed = 10;
 
         public GameScreen()
         {
@@ -47,12 +48,12 @@ namespace SpaceRace
         {
             p1Size = p2Size = 5;
 
-            bubble newbubble = new bubble(50, 0,20);
-            bubble newBubble2 = new bubble(50 + 400, 0,20);
+            bubble newbubble = new bubble(50, 0, 20);
+            bubble newBubble2 = new bubble(50 + 400, 0, 20);
             left.Add(newbubble);
             Right.Add(newBubble2);
         }
-         
+
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
 
@@ -116,7 +117,7 @@ namespace SpaceRace
                     break;
                 case Keys.S:
                     sArrowDown = false;
-                    break;             
+                    break;
             }
         }
 
@@ -133,18 +134,26 @@ namespace SpaceRace
             }
 
             // remove bubble if it has gone off screen
-            if (left[0].x > 400)
+            if (left.Count > 0)
             {
-                left.RemoveAt(0);
-                Right.RemoveAt(0);
-            }
-            else if( Right[0].x < this.Width)
-            {
-                left.RemoveAt(0);
-                Right.RemoveAt(0);
+
+
+
+                if (left[0].x > 400)
+                {
+                    left.RemoveAt(0);
+                    Right.RemoveAt(0);
+                }
+                else if (Right[0].x < this.Width)
+                {
+                    left.RemoveAt(0);
+                    Right.RemoveAt(0);
+                }
+
+
             }
             // controlling rocket
-            
+
             // check for collision
 
             Refresh();
@@ -166,7 +175,7 @@ namespace SpaceRace
                     BubbleBrush.Color = b.color;
                     e.Graphics.FillEllipse(BubbleBrush, b.x, b.y, b.size, b.size);
                 }
-                
+
             }
         }
     }
