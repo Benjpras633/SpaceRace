@@ -17,6 +17,8 @@ namespace SpaceRace
             InitializeComponent();
         }
 
+
+
         private void button1_Click(object sender, EventArgs e)
         {
             Form f = this.FindForm();
@@ -25,12 +27,12 @@ namespace SpaceRace
             GameScreen gs = new GameScreen();
             f.Controls.Add(gs);
             gs.Focus();
-           
+
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-    }
+    }   
 }

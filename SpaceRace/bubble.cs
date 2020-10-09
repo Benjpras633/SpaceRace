@@ -13,7 +13,7 @@ namespace SpaceRace
     {
         //variables in my class
         public SolidBrush bubbleBrush;
-        public int size,y,x;
+        public int size, y, x;
         public Color color;
 
         //random gen
@@ -68,6 +68,8 @@ namespace SpaceRace
         public void Move(int speed)
         {
             x += speed;
+
+
         }
 
         public void Move(int speed, Boolean direction)
@@ -82,5 +84,17 @@ namespace SpaceRace
             }
 
         }
+
+        public void MoveY(int speed, Boolean direction)
+        {
+            if (direction)
+            {
+                y += speed;
+            }
+            else
+            {
+                y -= speed;
+            }
         }
     }
+}
