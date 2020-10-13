@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-
+using System.Windows.Forms;
 
 namespace SpaceRace
 {
@@ -96,5 +96,12 @@ namespace SpaceRace
                 y -= speed;
             }
         }
+        //public Boolean Collision(bubble b)
+        //{
+        //    Rectangle heroRec = new Rectangle(b.x, b.y, b.size, b.size);
+        //    Rectangle bubbleRec = new Rectangle(x, y, size, size);
+
+        //    return heroRec.IntersectsWith(bubbleRec);
+        //}
     }
 }

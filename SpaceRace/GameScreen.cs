@@ -18,33 +18,26 @@ namespace SpaceRace
 
 
         //color of bubble
-        SolidBrush BubbleBrush = new SolidBrush(Color.White);        
+        SolidBrush BubbleBrush = new SolidBrush(Color.White);
         Font drawFont = new Font("Courier New", 50);
 
         //list for bubble coming on screen
         List<bubble> left = new List<bubble>();
         List<bubble> right = new List<bubble>();
+
+        //game score
         int player1Score = 0;
         int gameWinScore = 2;
         Boolean newgame = true;
 
-
-
-
         //random generator
         Random randGen = new Random();
 
-        
-        
-       
-   
-        Boolean moveRight = true;
-        
-
-
+        //Timer
         int BubbleTimer = 0;
         bubble hero;
 
+        //hero variables
         int heroSpeed = 10;
         int heroSize = 30;
 
@@ -58,17 +51,14 @@ namespace SpaceRace
 
         public void OnStart()
         {
-           
 
             //hero = new bubble(250, 400, 20);
             hero = new bubble(this.Width / 2 - heroSize / 2, 370, heroSize);
 
             MakeBubble();
 
-            scoreLabel.Text = player1Score + "";      
+            scoreLabel.Text = player1Score + "";
         }
-
-        
 
         public void MakeBubble()
         {
@@ -83,7 +73,7 @@ namespace SpaceRace
 
             BubbleTimer = 0;
 
-          
+
         }
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -112,12 +102,6 @@ namespace SpaceRace
                         MainScreen ms = new MainScreen();
                         f.Controls.Add(ms);
                         ms.Focus();
-                    }
-                    break;
-                case Keys.N:
-                    if (newgame)
-                    {
-                        Application.Exit();
                     }
                     break;
                 case Keys.Escape:
@@ -166,14 +150,10 @@ namespace SpaceRace
                 MakeBubble();
             }
 
-
             if (player1Score == gameWinScore)
             {
-              GameOver("");
+                GameOver("");
             }
-            
-
-
 
             // controlling rocket
             if (leftArrowDown == true && hero.y > 0)
@@ -200,75 +180,99 @@ namespace SpaceRace
             {
                 hero.y = this.Height;
                 player1Score++;
-                scoreLabel.Text  = player1Score + "";
-
+                scoreLabel.Text = player1Score + "";
             }
 
-            //check for collision
             Rectangle heroRec = new Rectangle(hero.x, hero.y, hero.size, hero.size);
 
             foreach (bubble b in left)
             {
-                
+                Rectangle boxRec = new Rectangle(b.x, b.y, b.size, b.size);
+
+                if (heroRec.IntersectsWith(boxRec))
+                {
+                    gameloop.Enabled = false;
+                    return;
+                }
             }
-            
-          //if (left.Count >= 10)
-          //{
-          //    //0-3
-          //    for (int i = 0; i < 10; i++)
-          //    {
-          //        Rectangle boxRec = new Rectangle(left[i].x, left[i].y, left[i].size, left[i].size);
-          //        Rectangle rightboxRec = new Rectangle(right[i].x, right[i].y, right[i].size, right[i].size);
-
-          //        if (heroRec.IntersectsWith(rightboxRec) || heroRec.IntersectsWith(boxRec))
-          //        {
-
-          //            outputLabel.Text = "Press space bar to play again, or press n to exit";
-          //        }
-
-          //    }
-
-          //  }
-            Refresh();
-        }
-        private void GameOver(string winner)
-        {
-            newgame = true;
-
-          
-            gameloop.Stop();
-
-            outputLabel.Visible = true;
-            if (winner == "p1")
-            { outputLabel.Text = "You win!"; }           
-         
-            this.Refresh();
-            Thread.Sleep(2000);
-           
-            newgame = true;
-            outputLabel.Text = "Press space bar to play again, or press n to exit";
-
-        }
-        private void GameScreen_Paint(object sender, PaintEventArgs e)
-        {
+            foreach (bubble b in right)
             {
-                //TODO - draw bubbles to screen
-                foreach (bubble b in left)
+                Rectangle boxRec = new Rectangle(b.x, b.y, b.size, b.size);
+
+                if (heroRec.IntersectsWith(boxRec))
                 {
-
-                    e.Graphics.FillEllipse(b.bubbleBrush, b.x, b.y, b.size, b.size);
-
-
+                    gameloop.Enabled = false;
+                    return;
                 }
-                foreach (bubble b in right)
+            }
+
+        }
+        //public void HeroBubbleCollision()
+        //{
+        //    List<int> heroRemove = new List<int>();
+        //    List<int> bubbleRemove = new List<int>();
+        //    foreach (bubble b in left)
+        //    {
+        //        foreach (bubble a in right)
+        //        {
+        //            if (a.Collision(b))
+        //            {
+        //                if (!bubbleRemove.Contains(left.IndexOf(b)))
+        //                {
+        //                    bubbleRemove.Add(left.IndexOf(b));
+        //                }
+        //                if (!heroRemove.Contains(right.IndexOf(a)))
+        //                {
+        //                    heroRemove.Add(right.IndexOf(a));
+        //                }
+        //            }
+        //            Refresh();
+        //        }
+        //    }
+        //}
+
+        private void GameOver(string winner)
+            {
+                newgame = true;
+
+
+                gameloop.Stop();
+
+                outputLabel.Visible = true;
+                if (winner == "p1")
+                { outputLabel.Text = "You win!"; }
+
+                this.Refresh();
+                Thread.Sleep(2000);
+
+
+                outputLabel.Text = "Press space bar to play again, or press n to exit";
+
+            }
+        
+            public void GameScreen_Paint(object sender, PaintEventArgs e)
+            {
                 {
+                    //TODO - draw bubbles to screen
+                    foreach (bubble b in left)
+                    {
 
-                    e.Graphics.FillEllipse(b.bubbleBrush, b.x, b.y, b.size, b.size);
+                        e.Graphics.FillEllipse(b.bubbleBrush, b.x, b.y, b.size, b.size);
+
+
+                    }
+                    foreach (bubble b in right)
+                    {
+
+                        e.Graphics.FillEllipse(b.bubbleBrush, b.x, b.y, b.size, b.size);
+                    }
+
+                    e.Graphics.FillEllipse(BubbleBrush, hero.x, hero.y, hero.size, hero.size);
+                    e.Graphics.DrawImage(Properties.Resources.rocket, hero.x, hero.y, hero.size, hero.size);
                 }
-
-                e.Graphics.FillEllipse(BubbleBrush, hero.x, hero.y, hero.size, hero.size);
-                e.Graphics.DrawImage(Properties.Resources.rocket, hero.x, hero.y, hero.size, hero.size);
             }
         }
     }
-}
+
+
+
