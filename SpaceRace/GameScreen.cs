@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Media;
 namespace SpaceRace
 {
     public partial class GameScreen : UserControl
@@ -16,11 +17,9 @@ namespace SpaceRace
         //movement boolean for p1 
         Boolean leftArrowDown, rightArrowDown, upArrowDown, downArrowDown;
 
-
         //color of bubble
         SolidBrush BubbleBrush = new SolidBrush(Color.White);
-        Font drawFont = new Font("Courier New", 50);
-
+       
         //list for bubble coming on screen
         List<bubble> left = new List<bubble>();
         List<bubble> right = new List<bubble>();
@@ -30,10 +29,12 @@ namespace SpaceRace
         int gameWinScore = 2;
         Boolean newgame = true;
 
-        //random generator
+        //random generator and sound effects
         Random randGen = new Random();
+        SoundPlayer lose = new SoundPlayer(Properties.Resources.lose);
+        SoundPlayer win = new SoundPlayer(Properties.Resources.win);
 
-        //Timer
+        //Timer and hero
         int BubbleTimer = 0;
         bubble hero;
 
@@ -51,7 +52,6 @@ namespace SpaceRace
 
         public void OnStart()
         {
-
             //hero = new bubble(250, 400, 20);
             hero = new bubble(this.Width / 2 - heroSize / 2, 370, heroSize);
 
@@ -72,8 +72,6 @@ namespace SpaceRace
             right.Add(newBubble2);
 
             BubbleTimer = 0;
-
-
         }
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -127,7 +125,6 @@ namespace SpaceRace
                 case Keys.Down:
                     downArrowDown = false;
                     break;
-
             }
         }
 
@@ -150,11 +147,11 @@ namespace SpaceRace
                 MakeBubble();
             }
 
-            if (player1Score == gameWinScore)
+            if(player1Score == gameWinScore)
             {
-                GameOver("");
+                win.Play();
+                GameWin();
             }
-
             // controlling rocket
             if (leftArrowDown == true && hero.y > 0)
             {
@@ -192,6 +189,8 @@ namespace SpaceRace
                 if (heroRec.IntersectsWith(boxRec))
                 {
                     gameloop.Enabled = false;
+                    lose.Play();
+                    GameOver();
                     return;
                 }
             }
@@ -202,54 +201,42 @@ namespace SpaceRace
                 if (heroRec.IntersectsWith(boxRec))
                 {
                     gameloop.Enabled = false;
+                    lose.Play(); 
+                    GameOver();               
                     return;
                 }
             }
-
+            Refresh();
         }
-        //public void HeroBubbleCollision()
-        //{
-        //    List<int> heroRemove = new List<int>();
-        //    List<int> bubbleRemove = new List<int>();
-        //    foreach (bubble b in left)
-        //    {
-        //        foreach (bubble a in right)
-        //        {
-        //            if (a.Collision(b))
-        //            {
-        //                if (!bubbleRemove.Contains(left.IndexOf(b)))
-        //                {
-        //                    bubbleRemove.Add(left.IndexOf(b));
-        //                }
-        //                if (!heroRemove.Contains(right.IndexOf(a)))
-        //                {
-        //                    heroRemove.Add(right.IndexOf(a));
-        //                }
-        //            }
-        //            Refresh();
-        //        }
-        //    }
-        //}
+        public void GameWin()
+        {
+            gameloop.Enabled = false;
+            outputLabel.Visible = true;
+            outputLabel.Text = "You'Win!";
+            outputLabel.Refresh();
 
-        private void GameOver(string winner)
-            {
-                newgame = true;
+            this.Refresh();
+            Thread.Sleep(2000);
 
-
-                gameloop.Stop();
-
-                outputLabel.Visible = true;
-                if (winner == "p1")
-                { outputLabel.Text = "You win!"; }
-
+            outputLabel.Visible = true;
+            outputLabel.Text = "press space for a new game or esc to exit";
+            outputLabel.Refresh();       
+        }
+        public void GameOver()
+        {
+            gameloop.Enabled = false;             
+              outputLabel.Visible = true;
+            outputLabel.Text = "You've been hit!";
+            outputLabel.Refresh();
+                            
                 this.Refresh();
                 Thread.Sleep(2000);
 
-
-                outputLabel.Text = "Press space bar to play again, or press n to exit";
-
-            }
-        
+            outputLabel.Visible = true;
+                outputLabel.Text = "press space for a new game or esc to exit";
+            outputLabel.Refresh();
+            
+        }      
             public void GameScreen_Paint(object sender, PaintEventArgs e)
             {
                 {

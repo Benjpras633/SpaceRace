@@ -52,12 +52,13 @@
             // 
             // outputLabel
             // 
-            this.outputLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outputLabel.Font = new System.Drawing.Font("Showcard Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.outputLabel.ForeColor = System.Drawing.Color.White;
-            this.outputLabel.Location = new System.Drawing.Point(58, 267);
+            this.outputLabel.Location = new System.Drawing.Point(32, 275);
             this.outputLabel.Name = "outputLabel";
             this.outputLabel.Size = new System.Drawing.Size(667, 178);
             this.outputLabel.TabIndex = 2;
+            this.outputLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.outputLabel.Visible = false;
             // 
             // GameScreen

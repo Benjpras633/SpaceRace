@@ -102,5 +102,14 @@
   <ItemGroup>
     <None Include="Resources\rocket.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\448226__inspectorj__explosion-8-bit-01.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\118655__pyzaist__yay.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\270334__littlerobotsoundfactory__jingle-lose-01.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

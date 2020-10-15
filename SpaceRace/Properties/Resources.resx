@@ -117,14 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="boom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\448226__inspectorj__explosion-8-bit-01.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\270334__littlerobotsoundfactory__jingle-lose-01.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rocket" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAACrSURBVHhe7dS7DcIwFAXQTMMAKRiEAokx2Iud2IGWwsjBjqwotCBxz5GeEtvVu/5MAAAAAADw
-        FaV9I5XbPNcAIkMol/NpCaB+6/g9nWFtvldaCL3Z8Qr0ihF9BSoB7FSc8Q2IszS+eQSjRAewNLzzCEaE
-        sO76NoDhNPy13uSnE1ArRmTTi+fjWO7Xw1p13JYy1IZ7CP2/LeUYA2hTWfrOxwYAAAAAAAC/ME0vSOuc
-        fwZJJtIAAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAAKtJREFUeF7t
+        1LsNwjAUBdBMwwApGIQCiTHYi53YgZbCyMGOrCi0IHHPkZ4S29W7/kwAAAAAAPAVpX0jlds81wAiQyiX
+        82kJoH7r+D2dYW2+V1oIvdnxCvSKEX0FKgHsVJzxDYizNL55BKNEB7A0vPMIRoSw7vo2gOE0/LXe5KcT
+        UCtGZNOL5+NY7tfDWnXcljLUhnsI/b8t5RgDaFNZ+s7HBgAAAAAAAL8wTS9I65x/Bkkm0gAAAABJRU5E
+        rkJggg==
 </value>
+  </data>
+  <data name="win" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\118655__pyzaist__yay.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
