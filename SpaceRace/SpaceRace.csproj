@@ -111,5 +111,8 @@
   <ItemGroup>
     <None Include="Resources\270334__littlerobotsoundfactory__jingle-lose-01.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\353925__dr-skitz__boo.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

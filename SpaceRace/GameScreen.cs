@@ -26,12 +26,12 @@ namespace SpaceRace
 
         //game score
         int player1Score = 0;
-        int gameWinScore = 2;
+        int gameWinScore = 3;
         Boolean newgame = true;
 
         //random generator and sound effects
         Random randGen = new Random();
-        SoundPlayer lose = new SoundPlayer(Properties.Resources.lose);
+        SoundPlayer boo = new SoundPlayer(Properties.Resources.boo);
         SoundPlayer win = new SoundPlayer(Properties.Resources.win);
 
         //Timer and hero
@@ -52,11 +52,8 @@ namespace SpaceRace
 
         public void OnStart()
         {
-            //hero = new bubble(250, 400, 20);
             hero = new bubble(this.Width / 2 - heroSize / 2, 370, heroSize);
-
             MakeBubble();
-
             scoreLabel.Text = player1Score + "";
         }
 
@@ -189,7 +186,7 @@ namespace SpaceRace
                 if (heroRec.IntersectsWith(boxRec))
                 {
                     gameloop.Enabled = false;
-                    lose.Play();
+                    boo.Play();
                     GameOver();
                     return;
                 }
@@ -201,7 +198,7 @@ namespace SpaceRace
                 if (heroRec.IntersectsWith(boxRec))
                 {
                     gameloop.Enabled = false;
-                    lose.Play(); 
+                    boo.Play(); 
                     GameOver();               
                     return;
                 }
